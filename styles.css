@@ -1,37 +1,62 @@
+/* ═══════════════════════════════════════════════════════════
+   HYPERSTITION — Zine Stylesheet
+   ═══════════════════════════════════════════════════════════ */
+
 :root {
   color-scheme: dark;
-  --bg: #050505;
-  --fg: #f2f2f2;
-  --ink: #0a0a0a;
+  --bg:      #080808;
+  --fg:      #ebebeb;
+  --accent:  #d63827;
+  --ghost:   rgba(235, 235, 235, 0.03);
+  --rule:    rgba(235, 235, 235, 0.12);
+  --ink:     #0a0a0a;
+
+  --font-display: "Unbounded", "Georgia", serif;
+  --font-body:    "IBM Plex Mono", "Courier New", monospace;
 }
 
-* {
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
   box-sizing: border-box;
-}
-
-html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+html {
   background: var(--bg);
-  color: var(--fg);
+  scroll-behavior: smooth;
 }
 
 body {
-  display: grid;
-  place-items: center;
-  font-family: "Unbounded", "Georgia", serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1vw + 0.5rem, 1rem);
+  line-height: 1.7;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  letter-spacing: 0.01em;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
-  overflow: hidden;
-  background: var(--bg);
 }
 
+/* Grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* ── Canvas (fixed WebGL background) ────────────────────── */
 canvas {
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -40,43 +65,699 @@ canvas {
   z-index: 0;
 }
 
+/* ── Accent utility ──────────────────────────────────────── */
+.accent {
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
 .veil {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60vmax 40vmax at 50% 20%, rgba(0, 0, 0, 0.35), transparent 60%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.55));
+    radial-gradient(60vmax 40vmax at 50% 20%, rgba(0,0,0,0.4), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.65));
   mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 1;
 }
 
-main {
+.hero__inner {
   position: relative;
   z-index: 2;
-  padding: 2.5rem 1.5rem;
-  max-width: 40ch;
-  text-align: center;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
 }
 
-h1 {
-  margin: 0;
+.hero__label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  padding: 0.3em 1em;
+}
+
+.hero__title {
+  font-family: var(--font-display);
   font-weight: 700;
-  text-transform: none;
-  font-size: clamp(1.7rem, 3.6vw + 0.6rem, 3.6rem);
-  line-height: 1.12;
+  font-size: clamp(3.5rem, 12vw, 14rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   text-shadow:
-    0 0 30px rgba(0, 0, 0, 0.6),
-    0 0 8px rgba(0, 0, 0, 0.8);
+    0 0 60px rgba(0,0,0,0.7),
+    0 0 12px rgba(0,0,0,0.9);
+}
+
+.hero__sub {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.06em;
+  color: var(--fg);
+  opacity: 0.75;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: var(--fg);
+  opacity: 0.45;
+  font-size: 1.4rem;
+  text-decoration: none;
+  animation: bob 2.2s ease-in-out infinite;
+  transition: opacity 0.2s;
+}
+
+.hero__scroll:hover {
+  opacity: 0.9;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPREADS WRAPPER
+   ═══════════════════════════════════════════════════════════ */
+.spreads {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+}
+
+/* ── Shared spread styles ────────────────────────────────── */
+.spread {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 9rem) clamp(1.5rem, 6vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+
+.spread__ghost {
+  position: absolute;
+  top: -0.15em;
+  right: -0.05em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(10rem, 22vw, 22rem);
+  line-height: 1;
+  color: var(--ghost);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+}
+
+.spread__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.spread__label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0.5;
+  margin-bottom: 2rem;
+}
+
+.spread__heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.2vw, 1.7rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.9rem;
+  color: var(--fg);
+}
+
+.spread__heading--full {
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.spread__deck {
+  font-style: italic;
+  opacity: 0.7;
+  max-width: 54ch;
+  margin-bottom: 3rem;
+  line-height: 1.8;
+}
+
+.spread__coda {
+  margin-top: 1.5rem;
+  font-style: italic;
+  opacity: 0.65;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+}
+
+/* Two-column layout */
+.spread__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-top: 3rem;
+}
+
+.spread__cols--asymmetric {
+  grid-template-columns: 2fr 3fr;
+}
+
+.spread__cols--asymmetric-reverse {
+  grid-template-columns: 3fr 2fr;
+}
+
+.spread__col p + p {
+  margin-top: 1em;
+}
+
+/* ── Pull quotes ─────────────────────────────────────────── */
+.pull-quote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  border: none;
+  margin: 2rem 0 3rem;
+  padding: 0;
+  max-width: 18ch;
+  color: var(--fg);
+  position: relative;
+}
+
+.pull-quote::before {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.pull-quote--large {
+  font-size: clamp(3rem, 6.5vw, 7rem);
+  max-width: 16ch;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPREAD 02 — Phenomena Grid
+   ═══════════════════════════════════════════════════════════ */
+
+/* Causal gradient comparison block */
+.spread__cols--compare {
+  grid-template-columns: 1fr 2fr;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.causal-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.causal-list li {
+  font-size: 0.92em;
+  line-height: 1.75;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+}
+
+.phenomena-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 2.5rem;
+  border: 1px solid var(--rule);
+}
+
+.phenomenon {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.phenomenon:last-child {
+  border-right: none;
+}
+
+.phenomenon--accent {
+  background: rgba(214, 56, 39, 0.04);
+}
+
+.phenomenon__type {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.phenomenon__flow {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  opacity: 0.9;
+}
+
+.phenomenon__tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.2em 0.6em;
+  align-self: flex-start;
+  line-height: 1.6;
+}
+
+.phenomenon__body {
+  font-size: 0.9em;
+  line-height: 1.75;
+  opacity: 0.75;
+  margin-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPREAD 03 — Mechanism Blocks
+   ═══════════════════════════════════════════════════════════ */
+.mechanism {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 1rem;
+}
+
+.mechanism__block {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 2rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.mechanism__block:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.mechanism__numeral {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  grid-row: span 2;
+  align-self: start;
+  padding-top: 0.1em;
+}
+
+.mechanism__heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  align-self: end;
+}
+
+.mechanism__body {
+  font-size: 0.95em;
+  line-height: 1.8;
+  opacity: 0.75;
+}
+
+.mechanism__body p + p {
+  margin-top: 1em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SPREAD 05 — Definition list + Dynamics
+   ═══════════════════════════════════════════════════════════ */
+.definition {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.definition dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 1.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.definition dd {
+  opacity: 0.7;
+  line-height: 1.75;
+  padding-left: 1rem;
+  border-left: 1px solid var(--rule);
+}
+
+.dynamics-list {
+  list-style: none;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dynamics-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: 0.95em;
+}
+
+.dynamics-list li > span:last-child {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER / COLOPHON
+   ═══════════════════════════════════════════════════════════ */
+.colophon {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
+  padding: 3rem clamp(1.5rem, 6vw, 7rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.colophon__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.colophon__year {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  .spread__cols,
+  .spread__cols--asymmetric,
+  .spread__cols--compare {
+    grid-template-columns: 1fr;
+  }
+
+  .phenomena-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phenomenon {
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .phenomenon:last-child {
+    border-bottom: none;
+  }
+
+  .mechanism__block {
+    grid-template-columns: 3rem 1fr;
+    column-gap: 1.25rem;
+  }
+
+  .colophon {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .hero__title {
+    word-break: break-word;
+    hyphens: manual;
+  }
 }
 
 @media (max-width: 480px) {
-  main {
-    padding: 2rem 1.25rem;
-    max-width: 34ch;
+  .spread {
+    padding: 3.5rem 1.25rem;
   }
 
-  h1 {
-    letter-spacing: 0.005em;
+  .spread__ghost {
+    font-size: clamp(8rem, 30vw, 12rem);
   }
+
+  .pull-quote {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   IMAGE FIGURES
+   ═══════════════════════════════════════════════════════════ */
+
+/* Hero figure — composited behind veil, above WebGL canvas */
+.hero__figure {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0; padding: 0;
+}
+.hero__figure img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.3) brightness(0.8);
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  display: block;
+}
+
+/* Spread figure — base */
+.spread__figure {
+  position: relative;
+  margin: 3.5rem 0 0;
+  border-top: 2px solid var(--accent);
+  overflow: hidden;
+}
+.spread__figure img {
+  display: block;
+  width: 100%;
+  max-height: 45vh;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(0.85) contrast(1.1);
+  opacity: 0.8;
+  /* Dissolve bottom into dark background */
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+/* Figcaption — overprinted stamp label */
+.spread__figure figcaption {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(8, 8, 8, 0.6);
+  padding: 0.2em 0.6em;
+  line-height: 1.5;
+  pointer-events: none;
+}
+
+/* True bleed — viewport-width centering trick, reliable at any container width */
+.spread__figure--bleed {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+}
+
+/* Per-spread rotation for hand-placed feel */
+.spread--01 .spread__figure--bleed { transform: translateX(-50%) rotate(-0.35deg); }
+.spread--03 .spread__figure--bleed { transform: translateX(-50%) rotate(0.3deg); }
+.spread--05 .spread__figure--bleed { transform: translateX(-50%) rotate(-0.2deg); }
+
+/* Per-image framing */
+.spread--02 .spread__figure img {
+  max-height: 35vh;
+  object-position: center center;
+}
+.spread--03 .spread__figure img {
+  max-height: 40vh;
+  object-position: center center;
+}
+
+/* Background image for Spread 04 */
+.spread__figure--bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0; padding: 0;
+  border: none;
+}
+.spread__figure--bg img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  filter: grayscale(1) contrast(1.1);
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+
+/* Colophon background — mimeograph paper texture */
+.colophon {
+  overflow: hidden;
+}
+.colophon__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0; padding: 0;
+  pointer-events: none;
+}
+.colophon__bg img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.2);
+  opacity: 0.15;
+  mix-blend-mode: screen;
+}
+/* Ensure colophon text stays above */
+.colophon__title, .colophon__year {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ZINE TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════ */
+
+/* Drop capital — Unbounded letter in accent red */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 4.5em;
+  line-height: 0.75;
+  float: left;
+  margin-right: 0.1em;
+  margin-top: 0.06em;
+  color: var(--accent);
+}
+
+/* Statement paragraph — large manifesto declaration (Spread 01 Reframing) */
+.spread__statement {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.5vw, 1.85rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  border-top: 2px solid var(--accent);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+/* Mantra — left-bordered continuation of pull-quote (Spread 04) */
+.spread__mantra {
+  font-style: italic;
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  line-height: 1.8;
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+  max-width: 52ch;
+  margin: 0 0 3.5rem;
+  opacity: 0.85;
+}
+
+/* Phenomenon card subtitle (corpus section heading in italic below type label) */
+.phenomenon__subtitle {
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  font-style: italic;
+  opacity: 0.4;
+  margin-top: -0.4rem;
+}
+
+/* Multi-paragraph phenomenon body */
+.phenomenon__body p + p {
+  margin-top: 0.85em;
+}
+
+/* Causal gradient list — display-font term labels + red border */
+.causal-list li {
+  border-left-color: var(--accent);
+}
+
+.causal-list li strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 0.35rem;
+}
+
+/* Definition list — thin accent rule under each term */
+.definition dt::after {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--accent);
+  margin: 0.4rem 0 0.6rem;
 }
