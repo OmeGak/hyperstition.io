@@ -106,7 +106,7 @@ body {
 }
 
 .why__label {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.4em;
   color: var(--purple);
@@ -160,7 +160,7 @@ body {
 }
 
 .section__label {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.4em;
   color: var(--purple);
@@ -170,7 +170,7 @@ body {
 .section__heading {
   font-family: "Unbounded", serif;
   font-weight: 700;
-  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   line-height: 1.25;
   margin-bottom: 2rem;
 }
