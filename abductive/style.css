@@ -131,6 +131,13 @@ body {
   letter-spacing: 0.15em;
   margin-top: 1rem;
   font-style: normal;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+}
+
+.why__author:hover {
+  color: var(--cyan);
 }
 
 .why__text {
