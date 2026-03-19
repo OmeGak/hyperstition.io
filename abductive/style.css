@@ -89,6 +89,46 @@ body {
   animation: breathe 3s ease-in-out infinite;
 }
 
+/* --- Why --- */
+.why {
+  background: #0a0a0f;
+  border-top: 1px solid rgba(179, 71, 255, 0.1);
+  border-bottom: 1px solid rgba(179, 71, 255, 0.1);
+  padding: 5rem 2rem;
+}
+
+.why__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.why__label {
+  font-family: "Unbounded", serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--purple);
+  margin-bottom: 1.2rem;
+}
+
+.why__text {
+  font-size: 0.85rem;
+  color: rgba(242, 242, 242, 0.75);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .why__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
 /* --- Sections --- */
 .section {
   max-width: 720px;
