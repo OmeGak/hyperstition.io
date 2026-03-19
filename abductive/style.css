@@ -106,13 +106,22 @@ body {
 }
 
 .why__label {
-  font-family: "Unbounded", serif;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.4em;
   color: var(--purple);
-  margin-bottom: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.why__author {
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.15em;
+  margin-top: 1rem;
+  font-style: normal;
 }
 
 .why__text {
