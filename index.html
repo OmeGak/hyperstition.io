@@ -108,59 +108,39 @@
                     </div>
 
                     <figure class="abduction-diagram" aria-label="Abduction diagram">
-                        <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <svg viewBox="0 0 900 390" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <defs>
-                                <marker id="arr-w" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                                     <polygon points="0 0, 10 3.5, 0 7" fill="#ebebeb"/>
-                                </marker>
-                                <marker id="arr-a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                    <polygon points="0 0, 10 3.5, 0 7" fill="#c9ef18"/>
-                                </marker>
-                                <marker id="arr-d" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                    <polygon points="0 0, 10 3.5, 0 7" fill="#ebebeb" opacity="0.4"/>
                                 </marker>
                             </defs>
 
-                            <!-- Equal spacing: PAST=160, TODAY=500, 2050=840 -->
-
-                            <!-- PAST circle — ghost outline -->
-                            <circle cx="160" cy="220" r="62" fill="#080808" fill-opacity="0.4" stroke="#ebebeb" stroke-width="1.5" stroke-opacity="0.4"/>
-                            <text x="160" y="215" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="13" fill="#ebebeb" opacity="0.5">PAST</text>
-                            <text x="160" y="233" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#ebebeb" opacity="0.3">1000 B.C.</text>
-
-                            <!-- TODAY circle — center -->
-                            <circle cx="500" cy="220" r="62" fill="#ebebeb"/>
-                            <text x="500" y="227" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="15" fill="#080808" letter-spacing="-0.01em">TODAY</text>
+                            <!-- TODAY circle -->
+                            <circle cx="120" cy="145" r="68" fill="#ebebeb"/>
+                            <text x="120" y="152" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="15" fill="#080808" letter-spacing="-0.01em">TODAY</text>
 
                             <!-- 2050 circle -->
-                            <circle cx="840" cy="220" r="62" fill="#c9ef18"/>
-                            <text x="840" y="229" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="22" fill="#080808" letter-spacing="-0.02em">2050</text>
+                            <circle cx="780" cy="145" r="68" fill="#c9ef18"/>
+                            <text x="780" y="154" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="22" fill="#080808" letter-spacing="-0.02em">2050</text>
 
-                            <!-- White arc: 2050 → TODAY -->
-                            <path d="M 818,162 C 760,28 558,28 524,162" fill="none" stroke="#ebebeb" stroke-width="1.5" marker-end="url(#arr-w)"/>
+                            <!-- Horizontal arrow: TODAY → 2050 -->
+                            <line x1="191" y1="145" x2="709" y2="145" stroke="#ebebeb" stroke-width="1.5" marker-end="url(#arr)"/>
 
-                            <!-- Accent arrow: TODAY → PAST -->
-                            <line x1="438" y1="220" x2="222" y2="220" stroke="#c9ef18" stroke-width="1.5" marker-end="url(#arr-a)"/>
+                            <!-- HYPERSTITION label -->
+                            <text x="450" y="92" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="15" fill="#ebebeb" letter-spacing="0.06em">HYPERSTITION</text>
 
-                            <!-- Dim arc: PAST → 2050 -->
-                            <path d="M 160,282 C 160,420 840,420 840,282" fill="none" stroke="#ebebeb" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arr-d)"/>
+                            <!-- Sub-labels -->
+                            <text x="450" y="170" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#ebebeb" opacity="0.6">Radical Shift</text>
+                            <text x="450" y="188" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#ebebeb" opacity="0.6">Free Imagination</text>
 
-                            <!-- ABDUCTION — top right, near 2050 -->
-                            <text x="960" y="90" text-anchor="end" font-family="Unbounded,sans-serif" font-weight="700" font-size="13" fill="#ebebeb" letter-spacing="0.06em">ABDUCTION</text>
+                            <!-- Arc: 2050 → TODAY -->
+                            <path d="M 780,215 C 780,320 120,320 120,215" fill="none" stroke="#ebebeb" stroke-width="1.5" marker-end="url(#arr)"/>
 
-                            <!-- ABDUCTION — accent, midpoint of TODAY→PAST arrow -->
-                            <text x="330" y="198" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="13" fill="#c9ef18" letter-spacing="0.06em">ABDUCTION</text>
-
-                            <!-- RETROSTITION — centered under TODAY -->
-                            <text x="500" y="312" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="13" fill="#ebebeb" letter-spacing="0.04em">RETROSTITION</text>
-                            <text x="500" y="330" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#ebebeb" opacity="0.5">Interpretation of past events</text>
-
-                            <!-- DEDUCTION — below bottom arc -->
-                            <text x="500" y="448" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="13" fill="#ebebeb" opacity="0.4" letter-spacing="0.06em">DEDUCTION</text>
+                            <!-- ABDUCTION label -->
+                            <text x="450" y="342" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="15" fill="#ebebeb" letter-spacing="0.06em">ABDUCTION</text>
 
                             <!-- Caption -->
-                            <text x="500" y="492" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#ebebeb" opacity="0.4">The present reshapes our understanding of history, creating a feedback loop where</text>
-                            <text x="500" y="511" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#ebebeb" opacity="0.4">the past justifies the future — and the future influences the present that interprets the past.</text>
+                            <text x="450" y="372" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#ebebeb" opacity="0.45">reasoning backward from a desired future to identify what must happen now.</text>
                         </svg>
                     </figure>
                 </div>
