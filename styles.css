@@ -305,6 +305,10 @@ html {
     grid-template-columns: 2fr 3fr;
 }
 
+.spread__cols--asymmetric-inverse {
+    grid-template-columns: 3fr 2fr;
+}
+
 .spread__col p {
     text-wrap: pretty;
 }
@@ -545,6 +549,19 @@ html {
     font-weight: 500;
     border-left: 2px solid var(--accent);
     padding-left: 1.5rem;
+    max-width: 52ch;
+    margin: 0;
+    opacity: 0.85;
+}
+
+.spread__mantra-right {
+    font-style: italic;
+    font-size: clamp(1rem, 1.3vw, 1.33rem);
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    font-weight: 500;
+    border-right: 2px solid var(--accent);
+    padding-right: 1.5rem;
     max-width: 52ch;
     margin: 0;
     opacity: 0.85;
