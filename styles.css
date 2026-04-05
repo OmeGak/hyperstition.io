@@ -183,28 +183,6 @@ html {
     animation: heatshift 12s ease-in-out infinite;
 }
 
-@keyframes heatshift {
-    0%,
-    100% {
-        text-shadow:
-            0 0 60px rgba(0, 0, 0, 0.7),
-            0 0 12px rgba(0, 0, 0, 0.9),
-            0 0 0 transparent;
-    }
-    33% {
-        text-shadow:
-            0 0 80px rgba(214, 56, 39, 0.08),
-            0 0 12px rgba(0, 0, 0, 0.9),
-            0 0 200px rgba(214, 56, 39, 0.03);
-    }
-    66% {
-        text-shadow:
-            0 0 60px rgba(0, 0, 0, 0.7),
-            0 0 20px rgba(214, 56, 39, 0.05),
-            0 0 160px rgba(214, 56, 39, 0.02);
-    }
-}
-
 .hero__sub {
     font-family: var(--font-body);
     font-style: italic;
