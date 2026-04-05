@@ -115,7 +115,7 @@
                         aria-label="Abduction diagram"
                     >
                         <svg
-                            viewBox="0 0 900 390"
+                            viewBox="0 0 900 340"
                             xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true"
                         >
@@ -136,7 +136,14 @@
                             </defs>
 
                             <!-- TODAY circle -->
-                            <circle cx="120" cy="145" r="68" fill="#ebebeb" />
+                            <circle
+                                cx="120"
+                                cy="145"
+                                r="68"
+                                fill="none"
+                                stroke="#ebebeb"
+                                stroke-width="1.5"
+                            />
                             <text
                                 x="120"
                                 y="152"
@@ -144,14 +151,21 @@
                                 font-family="Unbounded,sans-serif"
                                 font-weight="700"
                                 font-size="15"
-                                fill="#080808"
+                                fill="#ebebeb"
                                 letter-spacing="-0.01em"
                             >
                                 PRESENT
                             </text>
 
                             <!-- 2050 circle -->
-                            <circle cx="780" cy="145" r="68" fill="#c9ef18" />
+                            <circle
+                                cx="780"
+                                cy="145"
+                                r="68"
+                                fill="none"
+                                stroke="#c9ef18"
+                                stroke-width="1.5"
+                            />
                             <text
                                 x="780"
                                 y="154"
@@ -159,7 +173,7 @@
                                 font-family="Unbounded,sans-serif"
                                 font-weight="700"
                                 font-size="22"
-                                fill="#080808"
+                                fill="#c9ef18"
                                 letter-spacing="-0.02em"
                             >
                                 FUTURE
@@ -173,6 +187,7 @@
                                 y2="145"
                                 stroke="#ebebeb"
                                 stroke-width="1.5"
+                                stroke-dasharray="6 4"
                                 marker-end="url(#arr)"
                             />
 
@@ -193,7 +208,7 @@
                             <!-- Sub-labels -->
                             <text
                                 x="450"
-                                y="170"
+                                y="126"
                                 text-anchor="middle"
                                 font-family="IBM Plex Mono,monospace"
                                 font-size="13"
@@ -205,17 +220,18 @@
 
                             <!-- Arc: 2050 → TODAY -->
                             <path
-                                d="M 780,215 C 780,320 120,320 120,215"
+                                d="M 780,215 L 780,265 L 120,265 L 120,215"
                                 fill="none"
                                 stroke="#ebebeb"
                                 stroke-width="1.5"
+                                stroke-dasharray="6 4"
                                 marker-end="url(#arr)"
                             />
 
                             <!-- ABDUCTION label -->
                             <text
                                 x="450"
-                                y="342"
+                                y="292"
                                 text-anchor="middle"
                                 font-family="Unbounded,sans-serif"
                                 font-weight="700"
@@ -229,7 +245,7 @@
                             <!-- Caption -->
                             <text
                                 x="450"
-                                y="372"
+                                y="320"
                                 text-anchor="middle"
                                 font-family="IBM Plex Mono,monospace"
                                 font-size="12"
