@@ -310,6 +310,7 @@ html {
 }
 
 .spread__col p {
+    font-size: clamp(0.95rem, 1.1vw + 0.55rem, 1.666rem);
     text-wrap: pretty;
 }
 
@@ -364,9 +365,8 @@ html {
    SPREAD 02 — Abduction Diagram
    ═══════════════════════════════════════════════════════════ */
 .abduction-diagram {
-    margin-top: var(--sp-5);
+    margin-top: var(--sp-4);
     padding-top: var(--sp-4);
-    border-top: 1px solid var(--rule);
     width: 100%;
 }
 
